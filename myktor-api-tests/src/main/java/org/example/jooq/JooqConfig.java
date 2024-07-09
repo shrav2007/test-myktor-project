@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class JooqConfig {
 
-    public static Result<Record> getUsers(String tableName, String SQLQuery) throws SQLException {
+    public static Result<Record> getDataFromDB(String tableName, String SQLQuery) throws SQLException {
         String userName = "postgres";
         String password = "postgres";
         String url = "jdbc:postgresql://localhost:5433/ktor";

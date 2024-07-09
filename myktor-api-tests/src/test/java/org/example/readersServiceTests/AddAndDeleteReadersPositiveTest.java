@@ -58,7 +58,7 @@ public class AddAndDeleteReadersPositiveTest {
     @Test
     @Order(2)
     public void getReadersFromBdTest() throws Exception {
-        Result<Record> res = JooqConfig.getUsers("readers", "phone = '919191919'");
+        Result<Record> res = JooqConfig.getDataFromDB("readers", "phone = '919191919'");
         Assertions.assertNotNull(res);
     }
 

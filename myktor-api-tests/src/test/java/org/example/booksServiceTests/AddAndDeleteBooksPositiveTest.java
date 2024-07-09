@@ -56,7 +56,7 @@ public class AddAndDeleteBooksPositiveTest {
     @Test
     @Order(2)
     public void getBooksFromBdTest() throws Exception {
-        Result<Record> res = JooqConfig.getUsers("books", "name = 'TestNameOfBook'");
+        Result<Record> res = JooqConfig.getDataFromDB("books", "name = 'TestNameOfBook'");
         Assertions.assertNotNull(res);
     }
 

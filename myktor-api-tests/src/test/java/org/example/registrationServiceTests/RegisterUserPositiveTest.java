@@ -45,7 +45,7 @@ public class RegisterUserPositiveTest {
     @Test
     @Order(2)
     public void getUsersFromBdTest() throws Exception {
-        Result<Record> res = JooqConfig.getUsers("users", "login = 'test'");
+        Result<Record> res = JooqConfig.getDataFromDB("users", "login = 'test'");
         Assertions.assertNotNull(res);
     }
 
