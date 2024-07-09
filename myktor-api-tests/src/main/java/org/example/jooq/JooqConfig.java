@@ -1,7 +1,9 @@
 package org.example.jooq;
 
-import org.jooq.*;
+import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 import java.sql.Connection;
@@ -11,26 +13,21 @@ import java.util.Objects;
 
 
 public class JooqConfig {
+    static String USERNAME = "postgres";
+    static String PASSWORD = "postgres";
+    static String URL = "jdbc:postgresql://localhost:5433/ktor";
 
     public static Result<Record> getDataFromDB(String tableName, String SQLQuery) throws SQLException {
-        String userName = "postgres";
-        String password = "postgres";
-        String url = "jdbc:postgresql://localhost:5433/ktor";
-
-        try (Connection conn = DriverManager.getConnection(url, userName, password)) {
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            return (Result<Record>) create.select().from(tableName).where(SQLQuery).fetch();
+            return create.select().from(tableName).where(SQLQuery).fetch();
         }
     }
 
     public static String getId(String tableName, String SQLQuery) throws SQLException {
-        String userName = "postgres";
-        String password = "postgres";
-        String url = "jdbc:postgresql://localhost:5433/ktor";
-
-        try (Connection conn = DriverManager.getConnection(url, userName, password)) {
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            return  Objects.requireNonNull(create.select().from(tableName).where(SQLQuery).fetch().getFirst().get("id")).toString();
+            return Objects.requireNonNull(create.select().from(tableName).where(SQLQuery).fetch().getFirst().get("id")).toString();
         }
     }
 }
