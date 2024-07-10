@@ -28,7 +28,7 @@ public class RegisterUserPositiveTest {
     public void registerNewUserTest() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/register", jsonObj), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertEquals("tu", js.get("login").toString());
+        Assertions.assertEquals("tu", js.get("login").toString(), "Пользователь не зарегистрирован");
     }
 
     @Test
@@ -39,14 +39,14 @@ public class RegisterUserPositiveTest {
         }});
         Response response = Specifications.deleteResponse(specHelper.specDeleteHelper("/delete", jsonResponse), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertEquals("tu", js.get("login").toString());
+        Assertions.assertEquals("tu", js.get("login").toString(), "Пользователь не удален");
     }
 
     @Test
     @Order(2)
     public void getUsersFromBdTest() throws Exception {
         Result<Record> res = JooqConfig.getDataFromDB("users", "login = 'test'");
-        Assertions.assertNotNull(res);
+        Assertions.assertNotNull(res, "В БД не найден такой пользователь");
     }
 
 }

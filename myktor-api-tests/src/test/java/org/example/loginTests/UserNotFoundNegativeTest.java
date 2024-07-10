@@ -20,6 +20,6 @@ public class UserNotFoundNegativeTest {
     @Test
     public void loginUserDoesNotExistTest() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/login", jsonObj), 409);
-        Assertions.assertEquals(response.asString(), "User  not found");
+        Assertions.assertEquals(response.asString(), "User  not found", "Пользователь сущесвует");
     }
 }

@@ -21,6 +21,6 @@ public class RegisterUserNegativeTest {
     @Test
     public void registerUserAlreadyExistTest() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/register", jsonObj), 409);
-        Assertions.assertEquals("User already exists", response.asString());
+        Assertions.assertEquals("User already exists", response.asString(), "Пользователь не существует");
     }
 }

@@ -22,13 +22,13 @@ public class AddBooksNegativeTest {
     @Order(1)
     public void addBookWhichAlreadyExists() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/books/create", jsonObj), 409);
-        Assertions.assertEquals(response.asString(), "Book already exists");
+        Assertions.assertEquals(response.asString(), "Book already exists", "Книга не существует");
     }
 
     @Test
     @Order(2)
     public void addBookNoToken() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelperNoToken("/books/create", jsonObj), 409);
-        Assertions.assertEquals(response.asString(), "Token expired");
+        Assertions.assertEquals(response.asString(), "Token expired", "Пользователь авторизован");
     }
 }

@@ -23,13 +23,13 @@ public class AddAndDeleteReadersNegativeTest {
     @Order(1)
     public void addReaderWhichAlreadyExists() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/readers/create", jsonObj), 409);
-        Assertions.assertEquals(response.asString(), "Reader already exists");
+        Assertions.assertEquals(response.asString(), "Reader already exists", "Пользователь не существует");
     }
 
     @Test
     @Order(2)
     public void addReaderNoToken() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelperNoToken("/readers/create", jsonObj), 409);
-        Assertions.assertEquals(response.asString(), "Token expired");
+        Assertions.assertEquals(response.asString(), "Token expired", "Пользователь авторизован");
     }
 }

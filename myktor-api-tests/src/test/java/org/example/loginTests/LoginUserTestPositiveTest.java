@@ -26,14 +26,14 @@ public class LoginUserTestPositiveTest {
     public void loginUserTest() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/login", jsonObj), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertFalse(js.get("token").toString().isBlank());
+        Assertions.assertFalse(js.get("token").toString().isBlank(), "Нет ответа с токеном");
     }
 
     @Test
     @Order(2)
     public void getUsers() throws Exception {
         Result<Record> res = JooqConfig.getDataFromDB("users", "login = 'test'");
-        Assertions.assertNotNull(res);
+        Assertions.assertNotNull(res, "Пользователь с таким логином не существует");
     }
 
 }

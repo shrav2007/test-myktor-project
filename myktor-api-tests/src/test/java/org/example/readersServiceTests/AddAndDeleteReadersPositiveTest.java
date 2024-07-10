@@ -29,7 +29,7 @@ public class AddAndDeleteReadersPositiveTest {
     public void addNewReaderTest() throws Exception {
         Response response = Specifications.postResponse(specHelper.specPostHelper("/readers/create", jsonObj), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertFalse(js.get("readerId").toString().isBlank());
+        Assertions.assertFalse(js.get("readerId").toString().isBlank(), "Не пришел ответ с readerID");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class AddAndDeleteReadersPositiveTest {
         }});
         Response response = Specifications.postResponse(specHelper.specPostHelper("/readers/search", jsonResponse), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertTrue(js.get("phone").toString().contains("919191919"));
+        Assertions.assertTrue(js.get("phone").toString().contains("919191919"), "Читатель с таким номером не найден");
     }
 
     @Test
@@ -52,14 +52,13 @@ public class AddAndDeleteReadersPositiveTest {
         }});
         Response response = Specifications.deleteResponse(specHelper.specDeleteHelper("/readers", jsonResponse), 200);
         JsonPath js = new JsonPath(response.asString());
-        Assertions.assertFalse(js.get("readerId").toString().isBlank());
+        Assertions.assertFalse(js.get("readerId").toString().isBlank(), "Не пришел ответ с readerID" );
     }
 
     @Test
     @Order(2)
     public void getReadersFromBdTest() throws Exception {
         Result<Record> res = JooqConfig.getDataFromDB("readers", "phone = '919191919'");
-        Assertions.assertNotNull(res);
+        Assertions.assertNotNull(res, "В БД нет такого читателя");
     }
-
 }
