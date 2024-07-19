@@ -11,6 +11,7 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>myktor-api-tests</module>
+        <module>myktor-okhhtp-api-tests</module>
     </modules>
 
     <properties>
